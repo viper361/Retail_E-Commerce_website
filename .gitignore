@@ -1,0 +1,71 @@
+# ==========================================
+# 1. User-Specific Directories & Assets
+# ==========================================
+# Ignore the large volume of product images (as requested)
+static/images/products/
+
+# (Optional) If you want to ignore the JSON database so it doesn't get overwritten 
+# by team members, uncomment the line below. Otherwise, leave it commented.
+# products.json
+
+# ==========================================
+# 2. Python & Flask Specific
+# ==========================================
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Flask Instance folder (often contains local-only config or SQLite DBs)
+instance/
+
+# Flask session/caching
+.webassets-cache
+
+# ==========================================
+# 3. Virtual Environments
+# ==========================================
+# Environments where your Python packages are installed locally
+venv/
+.venv/
+env/
+.env/
+ENV/
+env.bak/
+venv.bak/
+
+# ==========================================
+# 4. Secrets & Configuration Files
+# ==========================================
+# NEVER commit .env files containing API keys, database URIs, or secret keys
+.env
+.flaskenv
+secrets.json
+config.ini
+*.pem
+
+# ==========================================
+# 5. OS Generated Files
+# ==========================================
+# Mac OS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ==========================================
+# 6. IDEs & Editors
+# ==========================================
+# VS Code
+.vscode/
+
+# PyCharm / IntelliJ
+.idea/
+
+# Sublime Text
+*.sublime-workspace
