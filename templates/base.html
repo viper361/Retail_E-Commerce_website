@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}viper.in — Online Store{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <header class="site-header">
+        <div class="header-top">
+            <div class="header-inner">
+                <a href="{{ url_for('home') }}" class="logo">viper<span class="logo-accent">.in</span></a>
+
+                <form class="search-form" action="{{ url_for('home') }}" role="search">
+                    <input type="text" name="q" class="search-input" placeholder="Search for products, brands and more" aria-label="Search products" autocomplete="off">
+                    <button type="submit" class="search-btn" aria-label="Search">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    </button>
+                </form>
+
+                <a href="{{ url_for('cart_page') }}" class="cart-link" aria-label="View cart">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    <span class="cart-count" id="cart-count">0</span>
+                    <span class="cart-label">Cart</span>
+                </a>
+            </div>
+        </div>
+
+        <nav class="category-nav" aria-label="Product categories">
+            <div class="header-inner category-nav-inner">
+                <a href="{{ url_for('home') }}" class="category-nav-link">All categories</a>
+                <a href="{{ url_for('category_page', slug='health_supplements') }}" class="category-nav-link">Health Supplements</a>
+                <a href="{{ url_for('category_page', slug='skin_care_products') }}" class="category-nav-link">Skin Care</a>
+                <a href="{{ url_for('category_page', slug='grocery') }}" class="category-nav-link">Groceries</a>
+                <a href="{{ url_for('category_page', slug='agricultural_products') }}" class="category-nav-link">Agri Products</a>
+                <a href="{{ url_for('category_page', slug='home_appliances') }}" class="category-nav-link">Home Appliances</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-col">
+                <div class="footer-logo">viper<span class="logo-accent">.in</span></div>
+                <p class="footer-tagline">Everyday essentials, delivered fast.</p>
+            </div>
+            <div class="footer-col">
+                <h3 class="footer-heading">Shop</h3>
+                <a href="{{ url_for('category_page', slug='health_supplements') }}">Health Supplements</a>
+                <a href="{{ url_for('category_page', slug='skin_care_products') }}">Skin Care</a>
+                <a href="{{ url_for('category_page', slug='grocery') }}">Groceries</a>
+                <a href="{{ url_for('category_page', slug='agricultural_products') }}">Agri Products</a>
+            </div>
+            <div class="footer-col">
+                <h3 class="footer-heading">Help</h3>
+                <a href="#">Shipping info</a>
+                <a href="#">Returns</a>
+                <a href="#">Contact us</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 viper.in — built as a demo storefront.</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>

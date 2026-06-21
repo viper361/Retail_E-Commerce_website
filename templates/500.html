@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Something went wrong — viper.in{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <div class="error-page">
+        <div class="error-page-code">500</div>
+        <h1 class="error-page-title">Something went wrong on our end</h1>
+        <p class="error-page-text">This wasn't caused by anything you did. Please try again in a moment.</p>
+        <a href="{{ url_for('home') }}" class="btn btn-primary">Go to homepage</a>
+    </div>
+</div>
+{% endblock %}

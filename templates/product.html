@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}{{ product.name }} — viper.in{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="{{ url_for('home') }}">Home</a>
+        <span aria-hidden="true">/</span>
+        <a href="{{ url_for('category_page', slug=product.category) }}">{{ category_display_name(product.category) }}</a>
+        <span aria-hidden="true">/</span>
+        <span class="current">{{ product.name }}</span>
+    </nav>
+
+    <div class="product-detail">
+        <div class="product-detail-image">
+            <img src="{{ product.image_path | product_image_url }}" alt="{{ product.name if product.image_path else 'No image available for ' + product.name }}">
+        </div>
+
+        <div class="product-detail-info">
+            <h1 class="product-detail-name">{{ product.name }}</h1>
+            <div class="product-detail-price">&#8377;{{ "{:,}".format(product.price) }}</div>
+
+            <div class="product-detail-buybox">
+                <div class="qty-selector">
+                    <button class="qty-btn" id="qty-minus" aria-label="Decrease quantity" type="button">&minus;</button>
+                    <span class="qty-value" id="qty-value">1</span>
+                    <button class="qty-btn" id="qty-plus" aria-label="Increase quantity" type="button">+</button>
+                </div>
+                <button class="btn btn-primary product-detail-add-btn" id="detail-add-btn" data-product-id="{{ product.id }}">Add to cart</button>
+            </div>
+
+            <div class="product-detail-description">
+                <h2 class="product-detail-section-title">About this product</h2>
+                <p>{{ product.description }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Page not found — viper.in{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <div class="error-page">
+        <div class="error-page-code">404</div>
+        <h1 class="error-page-title">We couldn't find that page</h1>
+        <p class="error-page-text">The link may be broken, or the page may have moved. Check the URL, or head back to the homepage.</p>
+        <a href="{{ url_for('home') }}" class="btn btn-primary">Go to homepage</a>
+    </div>
+</div>
+{% endblock %}

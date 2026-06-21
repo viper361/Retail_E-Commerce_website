@@ -1,95 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>viper.in | Online Store</title>
-    <link rel="stylesheet" href="../static/css/style.css">
-</head>
-<body>
+{% extends "base.html" %}
 
-<header class="top-bar">
-        <div class="nav-left">
-            <button id="back-btn" class="back-btn">⬅ Back</button>
-            <div class="logo" id="logo-home">viper.in</div>
-        </div>
-        <div class="search-container">
-            <input type="text" placeholder="Search here..." id="search-bar">
-        </div>
-        <div class="cart-icon" id="cart-btn">
-            🛒 <span id="cart-count">0</span>
-        </div>
-    </header>
+{% block title %}viper.in — Online Store{% endblock %}
 
-    <main class="container">
-        
-        <section id="home-page" class="page active">
-            
-            <div class="hero-banner">
-                <h1>Welcome to viper.in</h1>
-                <p>Your one-stop shop for everything you need, delivered fast.</p>
-            </div>
-
-            <h2 class="section-title">Shop by Category</h2>
-            <div class="category-grid">
-                
-            <div class="category-grid">
-                            
-               <div class="category-card" data-category="Health Supplements">
-        <img src="https://images.unsplash.com/photo-1584017911766-d451b3d0e843?w=500&q=80" alt="Health Supplements">
-        <div class="card-title">Health Supplements</div>
+{% block content %}
+<section class="hero">
+    <div class="page-container hero-inner">
+        <p class="hero-eyebrow">Trusted by shoppers across India</p>
+        <h1 class="hero-title">Everything you need,<br>delivered to your door.</h1>
+        <p class="hero-subtitle">Health supplements, skin care, groceries and agri products — all in one place.</p>
     </div>
-                
-                <div class="category-card" data-category="Skin Care">
-                    <img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=500&q=80" alt="Skin Care">
-                    <div class="card-title">Skin Care</div>
+</section>
+
+<div class="page-container">
+    <h2 class="section-heading">Shop by category</h2>
+
+    <div class="category-grid">
+        {% for cat in categories %}
+            {% if cat.is_empty %}
+            <div class="category-card category-card-empty" aria-disabled="true">
+                <div class="category-card-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M12 8v8M8 12h8"/></svg>
                 </div>
-                
-                <div class="category-card" data-category="Groceries">
-                    <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=500&q=80" alt="Groceries">
-                    <div class="card-title">Groceries</div>
+                <div class="category-card-name">{{ cat.name }}</div>
+                <span class="category-card-badge">Coming soon</span>
+            </div>
+            {% else %}
+            <a href="{{ url_for('category_page', slug=cat.slug) }}" class="category-card">
+                <div class="category-card-icon">
+                    {% if cat.slug == 'health_supplements' %}
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10.5 20.5L3.5 13.5a5 5 0 117.07-7.07l.5.5.5-.5a5 5 0 117.07 7.07l-7 7a1 1 0 01-1.41 0z"/></svg>
+                    {% elif cat.slug == 'skin_care_products' %}
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2c3 3 6 6.5 6 11a6 6 0 11-12 0c0-4.5 3-8 6-11z"/></svg>
+                    {% elif cat.slug == 'grocery' %}
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 01-8 0"/></svg>
+                    {% elif cat.slug == 'agricultural_products' %}
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22V12M12 12C12 7 9 4 4 4c0 5 3 8 8 8zM12 12c0-5 3-8 8-8 0 5-3 8-8 8z"/></svg>
+                    {% endif %}
                 </div>
-                
-               <div class="category-card" data-category="Home Appliance">
-        <img src="https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?w=500&q=80" alt="Home Appliance">
-        <div class="card-title">Home Appliance</div>
+                <div class="category-card-name">{{ cat.name }}</div>
+                <span class="category-card-count">{{ cat.count }} product{{ 's' if cat.count != 1 else '' }}</span>
+            </a>
+            {% endif %}
+        {% endfor %}
     </div>
-    
-    <div class="category-card" data-category="Agri Products">
-        <img src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=500&q=80" alt="Agri Products">
-        <div class="card-title">Agri Products</div>
-    </div>
-
-            </div>
-            </div>
-        </section>
-
-        <section id="category-page" class="page">
-            <h2 id="category-title" class="section-title">Category Name</h2>
-            <div class="horizontal-scroll" id="products-container">
-                </div>
-        </section>
-
-        <section id="product-page" class="page">
-            <div class="product-detail-container" id="product-detail-view">
-                </div>
-        </section>
-
-        <section id="cart-page" class="page">
-            <h2 class="section-title">Your Cart</h2>
-            <div class="cart-items-list" id="cart-items-container">
-                </div>
-            <div class="cart-summary">
-                <div class="total-row">
-                    <span>Total Amount:</span>
-                    <span id="cart-total-amount">₹0</span>
-                </div>
-                <button class="buy-now-btn" id="checkout-btn">Buy Now</button>
-            </div>
-        </section>
-
-    </main>
-
-    <script src="../static/js/script.js"></script>
-</body>
-</html>
+</div>
+{% endblock %}
